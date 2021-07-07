@@ -12,6 +12,7 @@ const logger = (req, res, next) => {
   next();
 }
 
+
 /** @type {import("express").RequestHandler} */
 function validateUserId(req, res, next) {
   users.getById(req.params.id)
@@ -29,15 +30,26 @@ function validateUserId(req, res, next) {
     })
 }
 
+
 /** @type {import("express").RequestHandler} */
 function validateUser(req, res, next) {
-  // DO YOUR MAGIC
+  if (!Object.hasOwnProperty.call(req.body, 'name')) {
+    res.status(400).json({ message: "missing required name field" });
+  }
+  else
+    next();
 }
+
 
 /** @type {import("express").RequestHandler} */
 function validatePost(req, res, next) {
-  // DO YOUR MAGIC
+  if (!Object.hasOwnProperty.call(req.body, 'text')) {
+    res.status(400).json({ message: "missing required text field" });
+  }
+  else
+    next();
 }
+
 
 // do not forget to expose these functions to other modules
 module.exports = {

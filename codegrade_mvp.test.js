@@ -13,7 +13,8 @@ beforeEach(async () => {
   await db.seed.run()
 })
 afterAll(async () => {
-  await db.destroy()
+  //await db.releaseConnection()
+  await db.destroy((err) => { console.log(`ERROR ERROR ERROR: ${JSON.stringify(err)}`) })
 })
 
 test('[0] sanity check', () => {
